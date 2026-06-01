@@ -17,6 +17,8 @@ class ReactionController extends Controller
 
     public function toggle(Request $request): JsonResponse
     {
+        $this->authorize('create', Reaction::class);
+
         $validated = $request->validate([
             'reactable_type' => ['required', 'string', Rule::in(['post', 'comment'])],
             'reactable_id' => ['required', 'integer'],
@@ -90,10 +92,6 @@ class ReactionController extends Controller
 
     private function notifyReactionAuthor(Model $reactable, Reaction $reaction): void
     {
-        $author = $reactable instanceof Post
-            ? $reactable->user
-            : $reactable->user;
-
-        $this->notifications->notifyReaction($author, $reaction, $reactable);
+        $this->notifications->notifyReaction($reactable->user, $reaction, $reactable);
     }
 }

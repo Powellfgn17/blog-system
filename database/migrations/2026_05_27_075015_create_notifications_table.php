@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('type', 100);
+            $table->morphs('notifiable');
+            $table->json('data')->nullable();
+            $table->timestamp('read_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

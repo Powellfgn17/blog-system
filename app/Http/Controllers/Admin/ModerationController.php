@@ -9,7 +9,6 @@ use App\Models\Report;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -39,7 +38,15 @@ class ModerationController extends Controller
             })
             ->filter(fn ($item) => $item['reportable'] !== null);
 
-        return view('admin.moderation', ['flaggedItems' => $flagged]);
+        $users = User::query()
+            ->select(['id', 'name', 'username', 'email', 'is_admin', 'is_blocked', 'created_at'])
+            ->latest('created_at')
+            ->paginate(20);
+
+        return view('admin.moderation', [
+            'flaggedItems' => $flagged,
+            'users' => $users,
+        ]);
     }
 
     public function destroy(string $type, int $id): RedirectResponse
@@ -68,6 +75,20 @@ class ModerationController extends Controller
 
     public function block(User $user): RedirectResponse
     {
+        $actor = auth()->user();
+
+        if ($actor && $actor->id === $user->id) {
+            return back()->with('error', 'Vous ne pouvez pas bloquer votre propre compte.');
+        }
+
+        if ($user->is_admin) {
+            return back()->with('error', 'Impossible de bloquer un autre administrateur.');
+        }
+
+        if ($user->is_blocked) {
+            return back()->with('success', 'Utilisateur déjà bloqué.');
+        }
+
         $user->update(['is_blocked' => true]);
 
         DB::table('sessions')->where('user_id', $user->id)->delete();
@@ -77,6 +98,10 @@ class ModerationController extends Controller
 
     public function unblock(User $user): RedirectResponse
     {
+        if (! $user->is_blocked) {
+            return back()->with('success', 'Utilisateur déjà débloqué.');
+        }
+
         $user->update(['is_blocked' => false]);
 
         return back()->with('success', 'Utilisateur débloqué.');

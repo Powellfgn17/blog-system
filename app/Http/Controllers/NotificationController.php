@@ -12,6 +12,8 @@ class NotificationController extends Controller
 {
     public function index(Request $request): View|JsonResponse
     {
+        $this->authorize('viewAny', Notification::class);
+
         $notifications = Notification::query()
             ->where('user_id', $request->user()->id)
             ->latest('created_at')
@@ -29,6 +31,8 @@ class NotificationController extends Controller
 
     public function unreadCount(Request $request): JsonResponse
     {
+        $this->authorize('viewAny', Notification::class);
+
         return response()->json([
             'count' => $this->getUnreadCount($request),
         ]);
@@ -36,6 +40,8 @@ class NotificationController extends Controller
 
     public function readAll(Request $request): JsonResponse|RedirectResponse
     {
+        $this->authorize('viewAny', Notification::class);
+
         Notification::query()
             ->where('user_id', $request->user()->id)
             ->whereNull('read_at')
@@ -50,9 +56,7 @@ class NotificationController extends Controller
 
     public function markRead(Request $request, Notification $notification): JsonResponse|RedirectResponse
     {
-        if ($notification->user_id !== $request->user()->id) {
-            abort(403);
-        }
+        $this->authorize('update', $notification);
 
         $notification->markAsRead();
 

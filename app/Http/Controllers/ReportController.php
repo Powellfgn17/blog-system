@@ -7,12 +7,15 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 class ReportController extends Controller
 {
-    public function store(StoreReportRequest $request): RedirectResponse
+    public function store(StoreReportRequest $request): JsonResponse|RedirectResponse
     {
+        $this->authorize('create', Report::class);
+
         $reportable = $this->resolveReportable(
             $request->validated('reportable_type'),
             (int) $request->validated('reportable_id')
@@ -25,6 +28,13 @@ class ReportController extends Controller
             ->exists();
 
         if ($exists) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Vous avez déjà signalé ce contenu.',
+                ], 409);
+            }
+
             return back()->with('error', 'Vous avez déjà signalé ce contenu.');
         }
 
@@ -35,6 +45,13 @@ class ReportController extends Controller
             'reason' => $request->validated('reason'),
             'status' => Report::STATUS_PENDING,
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Signalement envoyé. Merci pour votre vigilance.',
+            ]);
+        }
 
         return back()->with('success', 'Signalement envoyé. Merci pour votre vigilance.');
     }

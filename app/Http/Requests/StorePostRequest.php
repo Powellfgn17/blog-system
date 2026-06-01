@@ -21,6 +21,7 @@ class StorePostRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
             'category_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'], // max 5MB
         ];
     }
 }

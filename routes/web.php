@@ -14,9 +14,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'blogIndex'])->name('blog.index');
-Route::get('/blog/{post}', [PostController::class, 'show'])->name('blog.show');
 Route::get('/community', [PostController::class, 'communityIndex'])->name('community.index');
-Route::get('/community/{post}', [PostController::class, 'show'])->name('community.show');
 Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/search', [PostController::class, 'search'])->name('search');
 
@@ -32,21 +30,23 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/community/{post}', [PostController::class, 'update'])->name('community.update');
     Route::delete('/community/{post}', [PostController::class, 'destroy'])->name('community.destroy');
 
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
-    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->middleware('throttle:20,1')->name('comments.store');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('throttle:30,1')->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->middleware('throttle:30,1')->name('comments.destroy');
 
-    Route::post('/reactions', [ReactionController::class, 'toggle'])->name('reactions.toggle');
-    Route::post('/bookmarks/{post}', [BookmarkController::class, 'toggle'])->name('bookmarks.toggle');
-    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::post('/reactions', [ReactionController::class, 'toggle'])->middleware('throttle:45,1')->name('reactions.toggle');
+    Route::post('/bookmarks/{post}', [BookmarkController::class, 'toggle'])->middleware('throttle:30,1')->name('bookmarks.toggle');
+    Route::post('/reports', [ReportController::class, 'store'])->middleware('throttle:6,1')->name('reports.store');
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread');
-    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
-    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->middleware('throttle:20,1')->name('notifications.read-all');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markRead'])->middleware('throttle:30,1')->name('notifications.read');
 
-    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+    Route::get('/users/search', [UserController::class, 'search'])->middleware('throttle:60,1')->name('users.search');
 });
+
+Route::get('/community/{post}', [PostController::class, 'show'])->name('community.show');
 
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
 
@@ -57,6 +57,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/blog/{post}', [PostController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{post}', [PostController::class, 'destroy'])->name('blog.destroy');
 });
+
+Route::get('/blog/{post}', [PostController::class, 'show'])->name('blog.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');

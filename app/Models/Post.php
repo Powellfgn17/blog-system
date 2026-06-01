@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model
 {
+    use HasFactory;
+
     public const TYPE_BLOG = 'BLOG';
 
     public const TYPE_COMMUNITY = 'COMMUNITY';
@@ -21,12 +24,20 @@ class Post extends Model
         'title',
         'body',
         'reading_time',
+        'cover_image_url',
+        'status',
+        'published_at',
+        'is_featured',
+        'slug',
+        'meta_description',
     ];
 
     protected function casts(): array
     {
         return [
             'reading_time' => 'integer',
+            'is_featured'  => 'boolean',
+            'published_at' => 'datetime',
         ];
     }
 
@@ -35,6 +46,13 @@ class Post extends Model
         static::saving(function (Post $post) {
             if ($post->isDirty('body')) {
                 $post->reading_time = static::calculateReadingTime($post->body ?? '');
+            }
+            if (empty($post->slug) && $post->title) {
+                $post->slug = \Illuminate\Support\Str::slug($post->title);
+            }
+            // Auto-set published_at when status changes to published
+            if ($post->isDirty('status') && $post->status === 'published' && empty($post->published_at)) {
+                $post->published_at = now();
             }
         });
     }
@@ -63,7 +81,7 @@ class Post extends Model
 
     public function rootComments(): HasMany
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Comment::class)->whereNull('parent_id')->latest();
     }
 
     public function bookmarks(): HasMany
@@ -81,6 +99,11 @@ class Post extends Model
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function scopeBlog(Builder $query): Builder
     {
         return $query->where('type', self::TYPE_BLOG);
@@ -94,6 +117,11 @@ class Post extends Model
     public function scopeRecent(Builder $query): Builder
     {
         return $query->orderByDesc('created_at');
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('status', 'published');
     }
 
     public function isBlog(): bool
@@ -111,5 +139,14 @@ class Post extends Model
         $minutes = $this->reading_time ?? static::calculateReadingTime($this->body ?? '');
 
         return "Lecture : {$minutes} min";
+    }
+
+    public function getCoverImageUrlAttribute($value): ?string
+    {
+        if ($value) {
+            return asset($value);
+        }
+
+        return null;
     }
 }

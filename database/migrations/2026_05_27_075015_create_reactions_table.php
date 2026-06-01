@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->morphs('reactable');
+            $table->enum('type', ['like', 'love', 'haha', 'sad', 'wow']);
+            $table->unique(['user_id', 'reactable_id', 'reactable_type']);
             $table->timestamps();
         });
     }

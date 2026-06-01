@@ -61,7 +61,7 @@ class CommentController extends Controller
         return back()->with('success', 'Commentaire publié.');
     }
 
-    public function update(StoreCommentRequest $request, Comment $comment): RedirectResponse
+    public function update(StoreCommentRequest $request, Comment $comment): JsonResponse|RedirectResponse
     {
         $this->authorize('update', $comment);
 
@@ -69,14 +69,25 @@ class CommentController extends Controller
 
         $this->notifications->notifyMentions($comment->body, $comment, $comment->post);
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'comment' => $comment->fresh(),
+            ]);
+        }
+
         return back()->with('success', 'Commentaire modifié.');
     }
 
-    public function destroy(Comment $comment): RedirectResponse
+    public function destroy(Request $request, Comment $comment): JsonResponse|RedirectResponse
     {
         $this->authorize('delete', $comment);
 
         $comment->delete();
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true]);
+        }
 
         return back()->with('success', 'Commentaire supprimé.');
     }

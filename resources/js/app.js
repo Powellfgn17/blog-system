@@ -1,4 +1,5 @@
 import './bootstrap';
+import './stitch-interactions';
 
 import Alpine from 'alpinejs';
 

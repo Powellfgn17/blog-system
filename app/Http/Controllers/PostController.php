@@ -31,7 +31,7 @@ class PostController extends Controller
     {
         $posts = Post::query()
             ->community()
-            ->with(['user', 'category'])
+            ->with(['user', 'category', 'reactions'])
             ->recent()
             ->paginate(10);
 
@@ -45,15 +45,24 @@ class PostController extends Controller
         $post->load(['user', 'category']);
 
         $post->load([
-            'rootComments' => fn ($q) => $q->with(['user', 'replies.user', 'reactions']),
+            'rootComments' => fn ($q) => $q->with(['user', 'replies.user', 'reactions', 'replies.reactions']),
             'reactions',
         ]);
+
+        $isBookmarked = false;
+        if (auth()->check()) {
+            $isBookmarked = \App\Models\Bookmark::query()
+                ->where('user_id', auth()->id())
+                ->where('post_id', $post->id)
+                ->exists();
+        }
 
         $view = $post->isBlog() ? 'posts.show' : 'posts.show';
 
         return view($view, [
             'post' => $post,
             'context' => $post->isBlog() ? 'blog' : 'community',
+            'isBookmarked' => $isBookmarked,
         ]);
     }
 
@@ -81,6 +90,7 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         $categories = Category::query()->orderBy('name')->get();
+        $post->load('tags');
 
         return view($post->isBlog() ? 'blog.create' : 'community.create', [
             'post' => $post,
@@ -99,32 +109,96 @@ class PostController extends Controller
             $this->authorize('createCommunity', Post::class);
         }
 
-        $post = Post::create([
-            'user_id' => $request->user()->id,
-            'category_id' => $request->validated('category_id'),
-            'type' => $type,
-            'title' => $request->validated('title'),
-            'body' => $request->validated('body'),
-        ]);
+        $status = $request->input('status', 'draft');
+
+        $data = [
+            'user_id'          => $request->user()->id,
+            'category_id'      => $request->validated('category_id'),
+            'type'             => $type,
+            'title'            => $request->validated('title'),
+            'body'             => $request->validated('body'),
+            'status'           => $status,
+            'is_featured'      => $request->boolean('is_featured'),
+            'slug'             => $request->input('slug') ?: \Illuminate\Support\Str::slug($request->validated('title')),
+            'meta_description' => $request->input('meta_description'),
+            'published_at'     => $status === 'scheduled' ? $request->input('published_at') : null,
+        ];
+
+        if ($request->hasFile('cover_image')) {
+            $path = $request->file('cover_image')->store('covers', 'public');
+            $data['cover_image_url'] = '/storage/' . $path;
+        }
+
+        $post = Post::create($data);
+
+        // Sync tags
+        if ($request->filled('tags')) {
+            $tagNames = array_map('trim', explode(',', $request->input('tags')));
+            $tagIds = [];
+            foreach ($tagNames as $tagName) {
+                if ($tagName === '') continue;
+                $tag = \App\Models\Tag::firstOrCreate(
+                    ['slug' => \Illuminate\Support\Str::slug($tagName)],
+                    ['name' => $tagName]
+                );
+                $tagIds[] = $tag->id;
+            }
+            $post->tags()->sync($tagIds);
+        }
 
         $this->notifications->notifyMentions($post->body, $post, $post);
 
+        $successMsg = $status === 'draft' ? 'Brouillon enregistré.' : 'Article publié avec succès.';
+
         return redirect()
             ->to($this->postShowRoute($post))
-            ->with('success', 'Publication créée avec succès.');
+            ->with('success', $successMsg);
     }
 
     public function update(StorePostRequest $request, Post $post): RedirectResponse
     {
         $this->authorize('update', $post);
 
-        $post->update($request->validated());
+        $status = $request->input('status', $post->status ?? 'draft');
+
+        $data = [
+            'category_id'      => $request->validated('category_id'),
+            'title'            => $request->validated('title'),
+            'body'             => $request->validated('body'),
+            'status'           => $status,
+            'is_featured'      => $request->boolean('is_featured'),
+            'slug'             => $request->input('slug') ?: \Illuminate\Support\Str::slug($request->validated('title')),
+            'meta_description' => $request->input('meta_description'),
+            'published_at'     => $status === 'scheduled' ? $request->input('published_at') : $post->published_at,
+        ];
+
+        if ($request->hasFile('cover_image')) {
+            $path = $request->file('cover_image')->store('covers', 'public');
+            $data['cover_image_url'] = '/storage/' . $path;
+        }
+
+        $post->update($data);
+
+        // Sync tags
+        if ($request->has('tags')) {
+            $tagNames = array_map('trim', explode(',', $request->input('tags', '')));
+            $tagIds = [];
+            foreach ($tagNames as $tagName) {
+                if ($tagName === '') continue;
+                $tag = \App\Models\Tag::firstOrCreate(
+                    ['slug' => \Illuminate\Support\Str::slug($tagName)],
+                    ['name' => $tagName]
+                );
+                $tagIds[] = $tag->id;
+            }
+            $post->tags()->sync($tagIds);
+        }
 
         $this->notifications->notifyMentions($post->body, $post, $post);
 
         return redirect()
             ->to($this->postShowRoute($post))
-            ->with('success', 'Publication mise à jour.');
+            ->with('success', 'Article mis à jour.');
     }
 
     public function destroy(Post $post): RedirectResponse

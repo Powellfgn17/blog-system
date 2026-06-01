@@ -11,6 +11,8 @@ class BookmarkController extends Controller
 {
     public function toggle(Request $request, Post $post): JsonResponse
     {
+        $this->authorize('create', Bookmark::class);
+
         $bookmark = Bookmark::query()
             ->where('user_id', $request->user()->id)
             ->where('post_id', $post->id)

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@php($featured = $posts->first())
 <section class="flex flex-col gap-12 md:gap-24 w-full">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-l-[4px] border-official-ink pl-4">
         <div>

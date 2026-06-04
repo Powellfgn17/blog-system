@@ -16,6 +16,12 @@ class PostController extends Controller
 
     public function blogIndex(Request $request): View
     {
+        $featured = Post::query()
+            ->blog()
+            ->whereNotNull('cover_image_url')
+            ->latest()
+            ->first();
+
         $posts = Post::query()
             ->blog()
             ->with(['user', 'category'])
@@ -24,7 +30,7 @@ class PostController extends Controller
 
         $categories = Category::query()->orderBy('name')->get();
 
-        return view('blog.index', compact('posts', 'categories'));
+        return view('blog.index', compact('posts', 'categories', 'featured'));
     }
 
     public function communityIndex(Request $request): View

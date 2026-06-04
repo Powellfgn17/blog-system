@@ -118,11 +118,26 @@ class DatabaseSeeder extends Seeder
 
         // Utilisateurs supplémentaires pour les interactions
         $extraUsers = collect();
+        $extraUsersData = [
+            ['username' => 'user_extra_1', 'name' => 'Marie Dupont', 'email' => 'user1@blog-system.test'],
+            ['username' => 'user_extra_2', 'name' => 'Pierre Durand', 'email' => 'user2@blog-system.test'],
+            ['username' => 'user_extra_3', 'name' => 'Claire Moreau', 'email' => 'user3@blog-system.test'],
+            ['username' => 'user_extra_4', 'name' => 'Antoine Leroy', 'email' => 'user4@blog-system.test'],
+            ['username' => 'user_extra_5', 'name' => 'Emma Petit', 'email' => 'user5@blog-system.test'],
+        ];
         for ($i = 1; $i <= 5; $i++) {
             $avatar = $downloadAvatar("user_extra_{$i}.jpg", "https://i.pravatar.cc/150?img=" . (10 + $i));
-            $extraUsers->push(User::factory()->create([
-                'avatar' => $avatar,
-            ]));
+            $extraUsers->push(User::query()->updateOrCreate(
+                ['email' => $extraUsersData[$i-1]['email']],
+                [
+                    'username' => $extraUsersData[$i-1]['username'],
+                    'name' => $extraUsersData[$i-1]['name'],
+                    'password' => Hash::make('password'),
+                    'is_admin' => false,
+                    'is_blocked' => false,
+                    'avatar' => $avatar,
+                ]
+            ));
         }
 
         $allUsers = collect([$admin, $devUser, $designerUser, $beginnerUser, $blockedUser])->concat($extraUsers);
@@ -325,12 +340,30 @@ class DatabaseSeeder extends Seeder
         }
 
         // Commentaires pour les posts blog
+        $sampleComments = [
+            'Excellent article, très instructif !',
+            'Je partage entièrement ce point de vue.',
+            'Merci pour ce partage, très bien écrit.',
+            'Article fascinant qui ouvre de nouvelles perspectives.',
+            'Très bonne analyse, j\'ai appris beaucoup.',
+        ];
         foreach ($blogPosts as $blogPost) {
-            Comment::factory()->count(random_int(2, 5))->create([
-                'post_id' => $blogPost->id,
-                'user_id' => $activeUsers->random()->id,
-                'parent_id' => null,
-            ]);
+            $count = rand(2, 5);
+            for ($i = 0; $i < $count; $i++) {
+                Comment::query()->updateOrCreate(
+                    [
+                        'post_id' => $blogPost->id,
+                        'user_id' => $activeUsers->random()->id,
+                        'body' => $sampleComments[array_rand($sampleComments)],
+                    ],
+                    [
+                        'post_id' => $blogPost->id,
+                        'user_id' => $activeUsers->random()->id,
+                        'body' => $sampleComments[array_rand($sampleComments)],
+                        'parent_id' => null,
+                    ]
+                );
+            }
         }
 
         // ============================================
@@ -350,7 +383,7 @@ class DatabaseSeeder extends Seeder
                         'reactable_type' => $post->getMorphClass(),
                     ],
                     [
-                        'type' => fake()->randomElement(Reaction::TYPES),
+                        'type' => Reaction::TYPES[array_rand(Reaction::TYPES)],
                     ]
                 );
             }
@@ -368,7 +401,7 @@ class DatabaseSeeder extends Seeder
                                 'reactable_type' => $comment->getMorphClass(),
                             ],
                             [
-                                'type' => fake()->randomElement(Reaction::TYPES),
+                                'type' => Reaction::TYPES[array_rand(Reaction::TYPES)],
                             ]
                         );
                     }

@@ -112,7 +112,7 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<body class="bg-paper-white text-official-ink antialiased min-h-screen flex flex-col font-ui-medium">
+<body class="bg-paper-white text-official-ink antialiased min-h-[100dvh] flex flex-col font-ui-medium">
     <!-- TopNavBar -->
     <header class="bg-paper-white dark:bg-official-ink text-official-ink dark:text-paper-white font-ui-medium text-ui-medium sticky top-0 border-b border-surface-border dark:border-on-primary-fixed-variant z-50 transition-colors duration-300">
         <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
@@ -153,19 +153,27 @@
             <div class="flex items-center gap-4 text-official-ink dark:text-paper-white">
 
                 @auth
-                    <a href="{{ route('notifications.index') }}" class="hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors flex items-center justify-center relative p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all">
+                    @if(auth()->user()->is_admin)
+                        <a href="{{ route('admin.dashboard') }}" class="md:hidden text-on-surface-variant dark:text-surface-dim hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all" title="Admin Dashboard">
+                            <span class="material-symbols-outlined text-[24px]">admin_panel_settings</span>
+                        </a>
+                    @endif
+                    <a href="{{ route('notifications.index') }}" class="hidden md:flex hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors items-center justify-center relative p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all">
                         <span class="material-symbols-outlined text-[24px]">notifications</span>
                         @php($notifCount = auth()->user()->notifications()->whereNull('read_at')->count())
                         @if($notifCount > 0)
                             <span class="absolute top-0 right-0 w-5 h-5 bg-reaction-red text-white rounded-full text-[10px] flex items-center justify-center font-bold">{{ $notifCount > 9 ? '9+' : $notifCount }}</span>
                         @endif
                     </a>
-                    <a href="{{ route('profile.show', auth()->user()->username) }}" class="hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all">
+                    <a href="{{ route('profile.show', auth()->user()->username) }}" class="hidden md:flex hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors items-center justify-center p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all">
                         <span class="material-symbols-outlined text-[24px]">person</span>
                     </a>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" class="flex items-center">
                         @csrf
-                        <button class="font-ui-small text-ui-small text-on-surface-variant dark:text-surface-dim hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors">Déconnexion</button>
+                        <button class="text-on-surface-variant dark:text-surface-dim hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-all">
+                            <span class="material-symbols-outlined text-[24px] md:hidden">logout</span>
+                            <span class="hidden md:inline font-ui-small text-ui-small">Déconnexion</span>
+                        </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="font-ui-small text-ui-small text-on-surface-variant dark:text-surface-dim hover:text-community-teal dark:hover:text-secondary-fixed-dim transition-colors">Connexion</a>
@@ -214,17 +222,17 @@
     </footer>
 
     <!-- Mobile Bottom Navigation Bar -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-paper-white dark:bg-official-ink border-t border-surface-border dark:border-surface-tint z-50 flex justify-around items-center h-16 px-2 safe-area-pb">
-        <a href="{{ route('blog.index') }}" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('blog.*') && !request()->routeIs('blog.create') && !request()->routeIs('blog.edit') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-paper-white dark:bg-official-ink border-t border-surface-border dark:border-surface-tint z-50 flex justify-around items-center pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] px-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] transform-gpu">
+        <a href="{{ route('blog.index') }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('blog.*') && !request()->routeIs('blog.create') && !request()->routeIs('blog.edit') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
             <span class="material-symbols-outlined text-[24px]" style="{{ request()->routeIs('blog.*') && !request()->routeIs('blog.create') && !request()->routeIs('blog.edit') ? 'font-variation-settings: \'FILL\' 1;' : '' }}">article</span>
             <span class="font-ui-small text-[10px] mt-1">Blog</span>
         </a>
-        <a href="{{ route('community.index') }}" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('community.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
+        <a href="{{ route('community.index') }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('community.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
             <span class="material-symbols-outlined text-[24px]" style="{{ request()->routeIs('community.*') ? 'font-variation-settings: \'FILL\' 1;' : '' }}">forum</span>
             <span class="font-ui-small text-[10px] mt-1">Forum</span>
         </a>
         @auth
-        <a href="{{ route('notifications.index') }}" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-dim relative {{ request()->routeIs('notifications.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
+        <a href="{{ route('notifications.index') }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim relative {{ request()->routeIs('notifications.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
             <div class="relative">
                 <span class="material-symbols-outlined text-[24px]" style="{{ request()->routeIs('notifications.*') ? 'font-variation-settings: \'FILL\' 1;' : '' }}">notifications</span>
                 @php($notifCount = auth()->user()->notifications()->whereNull('read_at')->count())
@@ -234,12 +242,12 @@
             </div>
             <span class="font-ui-small text-[10px] mt-1">Notifs</span>
         </a>
-        <a href="{{ route('profile.show', auth()->user()->username) }}" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('profile.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
+        <a href="{{ route('profile.show', auth()->user()->username) }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('profile.*') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
             <span class="material-symbols-outlined text-[24px]" style="{{ request()->routeIs('profile.*') ? 'font-variation-settings: \'FILL\' 1;' : '' }}">person</span>
             <span class="font-ui-small text-[10px] mt-1">Profil</span>
         </a>
         @else
-        <a href="{{ route('login') }}" class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-surface-dim">
+        <a href="{{ route('login') }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim">
             <span class="material-symbols-outlined text-[24px]">login</span>
             <span class="font-ui-small text-[10px] mt-1">Connexion</span>
         </a>

@@ -112,9 +112,9 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
-<body class="bg-paper-white text-official-ink antialiased min-h-[100dvh] flex flex-col font-ui-medium">
+<body class="bg-paper-white text-official-ink antialiased h-[100dvh] overflow-hidden flex flex-col font-ui-medium">
     <!-- TopNavBar -->
-    <header class="bg-paper-white dark:bg-official-ink text-official-ink dark:text-paper-white font-ui-medium text-ui-medium sticky top-0 border-b border-surface-border dark:border-on-primary-fixed-variant z-50 transition-colors duration-300">
+    <header class="flex-shrink-0 bg-paper-white dark:bg-official-ink text-official-ink dark:text-paper-white font-ui-medium text-ui-medium border-b border-surface-border dark:border-on-primary-fixed-variant z-50 transition-colors duration-300">
         <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
             <!-- Brand -->
             <div class="flex items-center gap-gutter">
@@ -183,7 +183,9 @@
         </div>
     </header>
 
-    <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-10 pb-24 md:pb-10">
+    <!-- Scrollable Content Area -->
+    <div class="flex-grow overflow-y-auto flex flex-col">
+        <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-10 pb-10">
         @if(session('success'))
             <div class="mb-6 rounded-DEFAULT border border-community-teal/30 bg-community-teal/5 px-4 py-3 font-ui-small text-ui-small text-community-teal flex items-center gap-2">
                 <span class="material-symbols-outlined text-sm">check_circle</span>
@@ -220,9 +222,10 @@
             </nav>
         </div>
     </footer>
+    </div>
 
     <!-- Mobile Bottom Navigation Bar -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-paper-white dark:bg-official-ink border-t border-surface-border dark:border-surface-tint z-50 flex justify-around items-center pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] px-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] transform-gpu">
+    <nav class="md:hidden flex-shrink-0 w-full bg-paper-white dark:bg-official-ink border-t border-surface-border dark:border-surface-tint z-50 flex justify-around items-center pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] px-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
         <a href="{{ route('blog.index') }}" class="flex flex-col items-center justify-center w-full text-on-surface-variant dark:text-surface-dim {{ request()->routeIs('blog.*') && !request()->routeIs('blog.create') && !request()->routeIs('blog.edit') ? 'text-community-indigo dark:text-secondary-fixed' : '' }}">
             <span class="material-symbols-outlined text-[24px]" style="{{ request()->routeIs('blog.*') && !request()->routeIs('blog.create') && !request()->routeIs('blog.edit') ? 'font-variation-settings: \'FILL\' 1;' : '' }}">article</span>
             <span class="font-ui-small text-[10px] mt-1">Blog</span>

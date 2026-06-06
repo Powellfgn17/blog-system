@@ -8,10 +8,10 @@
     $currentStatus = old('status', $isEdit ? $post->status : 'draft');
 @endphp
 
-<div class="min-h-screen bg-slate-50">
+<div class="min-h-screen bg-slate-50 -mt-10">
 
     {{-- ─── Editor Top Bar ──────────────────────────────────────── --}}
-    <div class="sticky top-[80px] z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
         <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <a href="{{ route('blog.index') }}" class="flex items-center gap-1.5 text-slate-500 hover:text-slate-800 transition-colors group">
@@ -195,7 +195,7 @@
         {{-- ══════════════════════════════════════════════════════
              RIGHT — Editorial Settings Sidebar
         ══════════════════════════════════════════════════════ --}}
-        <aside class="flex flex-col gap-4 xl:sticky xl:top-[136px]">
+        <aside class="flex flex-col gap-4 xl:sticky xl:top-[88px]">
 
             {{-- ── Publication Status ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">

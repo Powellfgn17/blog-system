@@ -11,7 +11,7 @@
             <form action="{{ route('search') }}" method="GET" class="flex gap-2 w-full sm:w-auto">
                 <input type="text" name="q" class="w-full sm:w-64 rounded-DEFAULT border-surface-border bg-paper-white dark:bg-official-ink dark:text-paper-white dark:border-surface-tint focus:border-community-teal focus:ring-1 focus:ring-community-teal font-ui-small text-ui-small" placeholder="Rechercher...">
                 <button class="px-4 py-2 rounded-DEFAULT border border-surface-border dark:border-surface-tint hover:bg-surface-container dark:hover:bg-primary-container transition-colors font-ui-small text-ui-small text-official-ink dark:text-paper-white">
-                    <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;">search</span>
+                    <span translate="no" class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;">search</span>
                 </button>
             </form>
             @auth
@@ -38,7 +38,7 @@
                 </p>
                 <div class="mt-4 flex items-center gap-2 font-ui-medium text-ui-medium text-official-ink dark:text-paper-white group-hover:text-community-indigo dark:group-hover:text-secondary-fixed transition-colors">
                     <span>Read Full Editorial</span>
-                    <span class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    <span translate="no" class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </div>
             </div>
             <div class="w-full lg:w-7/12 aspect-[4/3] md:aspect-video lg:aspect-[16/10] order-1 lg:order-2 overflow-hidden rounded-lg bg-surface-container dark:bg-primary-container">
@@ -124,7 +124,7 @@
                             {{ \Illuminate\Support\Str::limit(strip_tags($post->body), 220) }}
                         </p>
                         <div class="flex items-center gap-2 font-ui-medium text-ui-medium text-official-ink dark:text-paper-white uppercase tracking-wide text-xs group-hover:underline">
-                            Read Essay <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+                            Read Essay <span translate="no" class="material-symbols-outlined text-[16px]">arrow_outward</span>
                         </div>
                     </a>
                 @elseif($loop->index === 3)
@@ -132,7 +132,7 @@
                     <a href="{{ route('blog.show', $post) }}" class="md:col-span-6 p-8 md:p-12 bg-official-ink dark:bg-paper-white text-paper-white dark:text-official-ink rounded-lg flex flex-col justify-center items-center text-center relative overflow-hidden group cursor-pointer border border-transparent dark:border-surface-border">
                         <!-- Subtle background pattern using tailwind gradients -->
                         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white dark:from-black via-transparent to-transparent"></div>
-                        <span class="material-symbols-outlined text-[48px] text-surface-tint dark:text-on-surface-variant mb-6 relative z-10" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                        <span translate="no" class="material-symbols-outlined text-[48px] text-surface-tint dark:text-on-surface-variant mb-6 relative z-10" style="font-variation-settings: 'FILL' 1;">format_quote</span>
                         <blockquote class="font-display-xl-mobile text-display-xl-mobile md:font-display-xl md:text-display-xl font-extrabold leading-tight tracking-tight relative z-10 mb-8 max-w-lg mx-auto">
                             "{{ \Illuminate\Support\Str::limit(strip_tags($post->body), 80, '...') }}"
                         </blockquote>

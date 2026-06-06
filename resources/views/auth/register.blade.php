@@ -39,7 +39,7 @@
                 <h1 class="font-display-xl text-display-xl text-paper-white mb-8">Thesaurus</h1>
                 <div class="space-y-gutter max-w-md">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-community-teal text-3xl">edit_note</span>
+                        <span translate="no" class="material-symbols-outlined text-community-teal text-3xl">edit_note</span>
                         <div>
                             <h3 class="font-headline-lg text-headline-lg text-paper-white leading-tight">Curate Your Thoughts</h3>
                             <p class="text-on-primary-container font-article-body text-article-body mt-2">Publish long-form editorial content in a distraction-free, premium reading environment.</p>
@@ -47,7 +47,7 @@
                     </div>
                     
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-community-indigo text-3xl">groups</span>
+                        <span translate="no" class="material-symbols-outlined text-community-indigo text-3xl">groups</span>
                         <div>
                             <h3 class="font-headline-lg text-headline-lg text-paper-white leading-tight">Engage the Community</h3>
                             <p class="text-on-primary-container font-article-body text-article-body mt-2">Join vibrant discussions, react to trending ideas, and build a network of experts.</p>
@@ -55,7 +55,7 @@
                     </div>
                     
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-secondary-fixed text-3xl">auto_awesome</span>
+                        <span translate="no" class="material-symbols-outlined text-secondary-fixed text-3xl">auto_awesome</span>
                         <div>
                             <h3 class="font-headline-lg text-headline-lg text-paper-white leading-tight">AI-Enhanced Insights</h3>
                             <p class="text-on-primary-container font-article-body text-article-body mt-2">Leverage smart summaries and semantic analysis to navigate complex community threads.</p>
@@ -124,7 +124,7 @@
                     
                     <button type="submit" class="w-full py-4 px-6 bg-official-ink text-paper-white font-bold rounded hover:opacity-90 active:scale-[0.98] transition-all flex justify-center items-center gap-2 group">
                         Create Account
-                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        <span translate="no" class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </button>
                 </form>
                 
@@ -138,7 +138,7 @@
                 <!-- Subtle Community Feed Snippet for Engagement -->
                 <div class="mt-12 p-6 bg-surface-container-low border border-surface-border rounded-xl hidden lg:block">
                     <div class="flex items-center gap-2 mb-4">
-                        <span class="material-symbols-outlined text-community-teal" style="font-variation-settings: 'FILL' 1;">spark</span>
+                        <span translate="no" class="material-symbols-outlined text-community-teal" style="font-variation-settings: 'FILL' 1;">spark</span>
                         <span class="font-label-caps text-label-caps text-community-teal uppercase">Trending Discussion</span>
                     </div>
                     <p class="font-article-body text-ui-medium italic text-on-surface mb-3">"The intersection of minimalist design and social utility is the next frontier of digital identity..."</p>

@@ -4,7 +4,7 @@
 <section class="max-w-3xl mx-auto px-0 md:px-margin-desktop py-4 flex flex-col gap-8">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-surface-border pb-6">
         <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-4xl text-official-ink dark:text-paper-white" style="font-variation-settings: 'FILL' 1;">notifications</span>
+            <span translate="no" class="material-symbols-outlined text-4xl text-official-ink dark:text-paper-white" style="font-variation-settings: 'FILL' 1;">notifications</span>
             <div>
                 <h1 class="font-display-xl-mobile md:font-display-xl font-extrabold text-official-ink dark:text-paper-white tracking-tight">Notifications</h1>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim mt-2">Restez au courant de l'activité sur vos publications.</p>
@@ -12,7 +12,7 @@
         </div>
         @if($notifications->whereNull('read_at')->count() > 0)
             <button id="mark-all-read" class="flex items-center gap-2 px-6 py-2 rounded-full border border-surface-border dark:border-surface-tint text-official-ink dark:text-paper-white hover:bg-surface-container dark:hover:bg-primary-container transition-colors font-ui-medium text-ui-medium">
-                <span class="material-symbols-outlined text-[18px]">done_all</span> Tout marquer comme lu
+                <span translate="no" class="material-symbols-outlined text-[18px]">done_all</span> Tout marquer comme lu
             </button>
         @endif
     </div>
@@ -37,7 +37,7 @@
             @endphp
             <article class="notification-item flex gap-4 p-5 rounded-xl border transition-all duration-300 {{ $isRead ? 'bg-paper-white dark:bg-official-ink border-surface-border dark:border-surface-tint opacity-80' : 'bg-surface-container-low dark:bg-primary-container/30 border-community-indigo/30 dark:border-secondary-fixed/30 shadow-[0px_4px_20px_rgba(79,70,229,0.05)] cursor-pointer hover:shadow-[0px_6px_24px_rgba(79,70,229,0.08)]' }}" data-id="{{ $notification->id }}" data-url="{{ $notification->data['url'] ?? '#' }}" data-read="{{ $isRead ? 'true' : 'false' }}">
                 <div class="w-12 h-12 rounded-full bg-surface-container dark:bg-surface-container-low flex items-center justify-center flex-shrink-0">
-                    <span class="material-symbols-outlined {{ $iconColor }}">{{ $icon }}</span>
+                    <span translate="no" class="material-symbols-outlined {{ $iconColor }}">{{ $icon }}</span>
                 </div>
                 <div class="flex-grow flex flex-col justify-center">
                     <p class="font-ui-medium text-ui-medium text-official-ink dark:text-paper-white leading-snug">
@@ -51,7 +51,7 @@
             </article>
         @empty
             <div class="py-16 flex flex-col items-center justify-center text-center bg-surface-container-low dark:bg-primary-container/20 rounded-2xl border border-dashed border-surface-border dark:border-surface-tint">
-                <span class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">notifications_off</span>
+                <span translate="no" class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">notifications_off</span>
                 <h3 class="font-headline-lg-mobile text-2xl font-bold text-official-ink dark:text-paper-white mb-2">Aucune notification</h3>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim max-w-md">Vous n'avez aucune notification pour le moment. L'activité de la communauté apparaîtra ici.</p>
             </div>

@@ -37,7 +37,7 @@
             Thesaurus
         </div>
         <a class="flex items-center gap-2 text-on-surface-variant hover:text-official-ink transition-colors" href="/">
-            <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+            <span translate="no" class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
             <span class="font-ui-small text-ui-small">Back to home</span>
         </a>
     </header>
@@ -71,7 +71,7 @@
                     <div class="relative">
                         <input class="w-full px-4 py-3 bg-white border border-surface-border rounded-sm font-ui-medium text-ui-medium text-official-ink input-focus-ring transition-all" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" type="password"/>
                         <button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-official-ink" onclick="togglePassword()" type="button">
-                            <span class="material-symbols-outlined" data-icon="visibility" id="eye-icon">visibility</span>
+                            <span translate="no" class="material-symbols-outlined" data-icon="visibility" id="eye-icon">visibility</span>
                         </button>
                     </div>
                     @error('password')
@@ -109,7 +109,7 @@
                     Google
                 </button>
                 <button class="flex items-center justify-center gap-2 px-4 py-3 border border-surface-border rounded-sm bg-white hover:bg-surface-container-low transition-colors font-ui-small text-ui-small text-official-ink">
-                    <span class="material-symbols-outlined text-official-ink" data-icon="terminal">terminal</span>
+                    <span translate="no" class="material-symbols-outlined text-official-ink" data-icon="terminal">terminal</span>
                     GitHub
                 </button>
             </div>

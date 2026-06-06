@@ -9,7 +9,7 @@
         </div>
         
         <form action="{{ route('search') }}" method="GET" class="w-full md:w-auto relative group">
-            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-community-teal transition-colors">search</span>
+            <span translate="no" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-community-teal transition-colors">search</span>
             <input 
                 type="text" 
                 name="q" 
@@ -52,7 +52,7 @@
             </a>
         @empty
             <div class="col-span-full py-16 flex flex-col items-center justify-center text-center bg-surface-container-low dark:bg-primary-container/20 rounded-2xl border border-dashed border-surface-border dark:border-surface-tint">
-                <span class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4" style="font-variation-settings: 'FILL' 1;">search_off</span>
+                <span translate="no" class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4" style="font-variation-settings: 'FILL' 1;">search_off</span>
                 <h3 class="font-headline-lg-mobile text-2xl font-bold text-official-ink dark:text-paper-white mb-2">Aucun résultat trouvé</h3>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim max-w-md">Nous n'avons trouvé aucune publication correspondant à "{{ $query }}". Essayez d'utiliser d'autres mots-clés ou vérifiez l'orthographe.</p>
                 <a href="{{ route('blog.index') }}" class="mt-6 px-6 py-2 bg-official-ink dark:bg-paper-white text-paper-white dark:text-official-ink rounded-full font-ui-medium text-ui-medium hover:opacity-90 transition-opacity">

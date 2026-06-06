@@ -15,7 +15,7 @@
             <!-- Profil Public -->
             <div class="flex flex-col gap-6">
                 <div class="flex items-center gap-2 border-b border-surface-border dark:border-surface-tint pb-4">
-                    <span class="material-symbols-outlined text-community-indigo dark:text-secondary-fixed">person</span>
+                    <span translate="no" class="material-symbols-outlined text-community-indigo dark:text-secondary-fixed">person</span>
                     <h2 class="font-headline-lg-mobile text-xl font-bold text-official-ink dark:text-paper-white">Profil Public</h2>
                 </div>
 
@@ -27,7 +27,7 @@
                                 <img id="avatar-preview" src="{{ $user->avatar_url }}" alt="Avatar actuel" class="w-full h-full object-cover">
                             </div>
                             <label for="avatar" class="absolute inset-0 flex items-center justify-center bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
-                                <span class="material-symbols-outlined">photo_camera</span>
+                                <span translate="no" class="material-symbols-outlined">photo_camera</span>
                             </label>
                         </div>
                         <div class="text-center">
@@ -58,7 +58,7 @@
             <!-- Sécurité -->
             <div class="flex flex-col gap-6 pt-6 mt-2">
                 <div class="flex items-center gap-2 border-b border-surface-border dark:border-surface-tint pb-4">
-                    <span class="material-symbols-outlined text-community-indigo dark:text-secondary-fixed">lock</span>
+                    <span translate="no" class="material-symbols-outlined text-community-indigo dark:text-secondary-fixed">lock</span>
                     <h2 class="font-headline-lg-mobile text-xl font-bold text-official-ink dark:text-paper-white">Sécurité</h2>
                 </div>
 

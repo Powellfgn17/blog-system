@@ -47,7 +47,7 @@
         
         <div class="{{ $isOwner ? 'lg:col-span-8' : 'lg:col-span-12' }} flex flex-col gap-8">
             <div class="flex items-center gap-2 mb-2 border-b border-surface-border pb-4">
-                <span class="material-symbols-outlined text-community-indigo">forum</span>
+                <span translate="no" class="material-symbols-outlined text-community-indigo">forum</span>
                 <h2 class="font-display text-2xl font-bold text-official-ink">Contributions Récentes</h2>
             </div>
 
@@ -74,18 +74,18 @@
                     </p>
                     <div class="flex gap-4 items-center pt-4 border-t border-surface-border">
                         <div class="flex items-center gap-1.5 text-on-surface-variant font-ui-small text-xs bg-surface-container rounded-full px-3 py-1">
-                            <span class="material-symbols-outlined text-[16px] text-reaction-red">favorite</span> 
+                            <span translate="no" class="material-symbols-outlined text-[16px] text-reaction-red">favorite</span> 
                             <span>{{ $post->reactions()->count() }}</span>
                         </div>
                         <a href="{{ $post->isBlog() ? route('blog.show', $post) : route('community.show', $post) }}" class="flex items-center gap-1.5 text-on-surface-variant hover:text-community-teal transition-colors font-ui-small text-xs">
-                            <span class="material-symbols-outlined text-[16px]">chat_bubble</span> 
+                            <span translate="no" class="material-symbols-outlined text-[16px]">chat_bubble</span> 
                             <span>{{ $post->comments()->count() }} réponses</span>
                         </a>
                     </div>
                 </article>
             @empty
                 <div class="bg-white border border-surface-border rounded-xl p-8 text-center text-on-surface-variant shadow-sm">
-                    <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">article</span>
+                    <span translate="no" class="material-symbols-outlined text-4xl text-slate-300 mb-2">article</span>
                     <p>Aucune contribution rédigée pour le moment.</p>
                 </div>
             @endforelse
@@ -100,7 +100,7 @@
             @php($bookmarks = auth()->user()->bookmarks()->with(['post.user', 'post.category'])->latest('created_at')->take(4)->get())
             <aside class="lg:col-span-4 bg-white border border-surface-border rounded-xl p-6 shadow-[0px_4px_20px_rgba(15,23,42,0.05)]">
                 <div class="flex items-center gap-2 mb-6 border-b border-surface-border pb-4">
-                    <span class="material-symbols-outlined text-official-ink">bookmark</span>
+                    <span translate="no" class="material-symbols-outlined text-official-ink">bookmark</span>
                     <h2 class="font-display text-xl font-bold text-official-ink">Vos Favoris</h2>
                 </div>
                 
@@ -112,7 +112,7 @@
                                     <a class="block bg-surface-container-low hover:bg-surface-container p-4 rounded-lg border border-surface-border shadow-sm transition-all" href="{{ $bookmark->post->isBlog() ? route('blog.show', $bookmark->post) : route('community.show', $bookmark->post) }}">
                                         <h4 class="font-ui-medium text-sm text-official-ink group-hover:text-community-indigo transition-colors mb-1 line-clamp-2">{{ $bookmark->post->title }}</h4>
                                         <span class="font-ui-small text-xs text-on-surface-variant flex items-center gap-1 mt-2">
-                                            <span class="material-symbols-outlined text-[14px]">link</span> 
+                                            <span translate="no" class="material-symbols-outlined text-[14px]">link</span> 
                                             <span>{{ optional($bookmark->post->category)->name ?? 'Sans catégorie' }}</span>
                                         </span>
                                     </a>
@@ -125,7 +125,7 @@
                     </a>
                 @else
                     <div class="text-center text-on-surface-variant py-6">
-                        <span class="material-symbols-outlined text-3xl text-slate-300 mb-2">bookmark_border</span>
+                        <span translate="no" class="material-symbols-outlined text-3xl text-slate-300 mb-2">bookmark_border</span>
                         <p class="text-sm">Vous n'avez aucun favori pour le moment.</p>
                     </div>
                 @endif

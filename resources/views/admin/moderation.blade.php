@@ -11,7 +11,7 @@
     <section class="bg-surface-container-lowest dark:bg-primary-container/10 border border-surface-border dark:border-surface-tint rounded-lg shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
         <div class="flex justify-between items-center mb-6">
             <h2 class="font-ui-medium text-ui-medium font-bold text-official-ink dark:text-paper-white flex items-center gap-2">
-                <span class="material-symbols-outlined text-reaction-red">flag</span>
+                <span translate="no" class="material-symbols-outlined text-reaction-red">flag</span>
                 File d'attente des signalements
             </h2>
             <span class="bg-surface-container dark:bg-primary-container px-3 py-1 rounded-full font-label-caps text-label-caps text-on-surface-variant">Total: {{ count($flaggedItems) }}</span>
@@ -72,7 +72,7 @@
     <section class="bg-surface-container-lowest dark:bg-primary-container/10 border border-surface-border dark:border-surface-tint rounded-lg shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
         <div class="flex items-center justify-between mb-6">
             <h2 class="font-ui-medium text-ui-medium font-bold text-official-ink dark:text-paper-white flex items-center gap-2">
-                <span class="material-symbols-outlined text-community-indigo">group</span>
+                <span translate="no" class="material-symbols-outlined text-community-indigo">group</span>
                 Gestion des Utilisateurs
             </h2>
             <span class="bg-surface-container dark:bg-primary-container px-3 py-1 rounded-full font-label-caps text-label-caps text-on-surface-variant">Total: {{ $users->total() }}</span>

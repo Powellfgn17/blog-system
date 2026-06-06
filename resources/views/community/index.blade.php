@@ -68,26 +68,26 @@
                     </div>
                     <div class="relative" data-dropdown>
                         <button type="button" data-dropdown-trigger class="text-on-surface-variant hover:text-official-ink p-1 rounded-full hover:bg-surface-container transition-colors">
-                            <span class="material-symbols-outlined pointer-events-none">more_horiz</span>
+                            <span translate="no" class="material-symbols-outlined pointer-events-none">more_horiz</span>
                         </button>
                         <div data-dropdown-menu class="hidden absolute right-0 mt-2 w-48 bg-paper-white border border-surface-border rounded-xl shadow-lg z-50 flex flex-col overflow-hidden">
                             @can('update', $post)
                                 <a href="{{ route('community.edit', $post) }}" class="px-4 py-3 hover:bg-surface-container transition-colors font-ui-small text-ui-small text-official-ink flex items-center gap-2">
-                                    <span class="material-symbols-outlined text-[18px]">edit</span> Modifier
+                                    <span translate="no" class="material-symbols-outlined text-[18px]">edit</span> Modifier
                                 </a>
                             @endcan
                             @can('delete', $post)
                                 <form method="POST" action="{{ route('community.destroy', $post) }}" onsubmit="return confirm('Supprimer cette publication ?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="w-full text-left px-4 py-3 hover:bg-error-container hover:text-on-error-container transition-colors font-ui-small text-ui-small text-reaction-red flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-[18px]">delete</span> Supprimer
+                                        <span translate="no" class="material-symbols-outlined text-[18px]">delete</span> Supprimer
                                     </button>
                                 </form>
                             @endcan
                             @auth
                                 @cannot('update', $post)
                                     <button type="button" onclick="openReportModal('post', {{ $post->id }})" class="w-full text-left px-4 py-3 hover:bg-surface-container transition-colors font-ui-small text-ui-small text-official-ink flex items-center gap-2">
-                                        <span class="material-symbols-outlined text-[18px]">flag</span> Signaler
+                                        <span translate="no" class="material-symbols-outlined text-[18px]">flag</span> Signaler
                                     </button>
                                 @endcannot
                             @endauth
@@ -123,7 +123,7 @@
                                 data-reaction-type="love"
                                 class="flex items-center gap-2 px-3 py-1.5 rounded-full transition-colors group {{ $hasLoved ? 'bg-community-indigo/10 text-community-indigo' : 'bg-surface-container hover:bg-surface-dim' }}"
                             >
-                                <span class="material-symbols-outlined text-[16px] {{ $hasLoved ? 'text-community-indigo' : 'text-on-surface-variant group-hover:text-community-indigo' }}" style="{{ $hasLoved ? 'font-variation-settings: \'FILL\' 1;' : '' }}">favorite</span>
+                                <span translate="no" class="material-symbols-outlined text-[16px] {{ $hasLoved ? 'text-community-indigo' : 'text-on-surface-variant group-hover:text-community-indigo' }}" style="{{ $hasLoved ? 'font-variation-settings: \'FILL\' 1;' : '' }}">favorite</span>
                                 <span class="font-ui-medium text-xs font-semibold {{ $hasLoved ? 'text-community-indigo' : 'text-on-surface-variant group-hover:text-community-indigo' }}" data-reaction-count="love">{{ $loveCount }}</span>
                             </button>
                         </div>
@@ -131,11 +131,11 @@
 
                     <div class="flex items-center gap-4 text-on-surface-variant font-ui-small text-xs">
                         <a href="{{ route('community.show', $post) }}" class="hover:text-community-teal flex items-center gap-1 transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+                            <span translate="no" class="material-symbols-outlined text-[18px]">chat_bubble</span>
                             <span>{{ $post->comments()->count() }} Réponses</span>
                         </a>
                         <button type="button" class="hover:text-community-teal flex items-center gap-1 transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">share</span>
+                            <span translate="no" class="material-symbols-outlined text-[18px]">share</span>
                             <span>Partager</span>
                         </button>
                     </div>
@@ -143,7 +143,7 @@
             </article>
         @empty
             <div class="bg-white border border-surface-border rounded-xl p-8 text-center text-on-surface-variant shadow-sm">
-                <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">forum</span>
+                <span translate="no" class="material-symbols-outlined text-4xl text-slate-300 mb-2">forum</span>
                 <p>Aucune publication communautaire pour le moment.</p>
             </div>
         @endforelse
@@ -158,7 +158,7 @@
         <!-- Trending Spaces -->
         <div class="bg-white rounded-xl p-6 border border-surface-border shadow-[0px_4px_20px_rgba(15,23,42,0.05)]">
             <h3 class="font-display text-sm font-bold text-official-ink mb-4 flex items-center gap-2 uppercase tracking-wider text-[11px]">
-                <span class="material-symbols-outlined text-[18px] text-community-teal">trending_up</span>
+                <span translate="no" class="material-symbols-outlined text-[18px] text-community-teal">trending_up</span>
                 Espaces Tendances
             </h3>
             <div class="flex flex-wrap gap-2">
@@ -176,7 +176,7 @@
         <div class="relative bg-white rounded-xl p-6 border border-surface-border shadow-[0px_4px_20px_rgba(15,23,42,0.05)] overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-community-teal/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
             <h3 class="font-display text-sm font-bold text-official-ink mb-4 relative z-10 flex items-center gap-2 uppercase tracking-wider text-[11px]">
-                <span class="material-symbols-outlined text-[18px] text-community-indigo">groups</span>
+                <span translate="no" class="material-symbols-outlined text-[18px] text-community-indigo">groups</span>
                 Contributeurs Actifs
             </h3>
             <ul class="space-y-4 relative z-10">
@@ -206,7 +206,7 @@
         <div class="flex items-center justify-between">
             <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-official-ink dark:text-paper-white">Signaler un contenu</h2>
             <button onclick="closeReportModal()" class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-colors">
-                <span class="material-symbols-outlined text-on-surface-variant">close</span>
+                <span translate="no" class="material-symbols-outlined text-on-surface-variant">close</span>
             </button>
         </div>
 

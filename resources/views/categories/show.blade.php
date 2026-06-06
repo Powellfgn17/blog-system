@@ -5,7 +5,7 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-surface-border pb-6">
         <div>
             <div class="flex items-center gap-2 mb-2">
-                <span class="material-symbols-outlined text-community-teal text-xl">folder_open</span>
+                <span translate="no" class="material-symbols-outlined text-community-teal text-xl">folder_open</span>
                 <span class="font-label-caps text-xs uppercase text-on-surface-variant tracking-widest">Catégorie</span>
             </div>
             <h1 class="font-display-xl-mobile md:font-display-xl font-extrabold text-official-ink dark:text-paper-white tracking-tight">{{ $category->name }}</h1>
@@ -13,7 +13,7 @@
         </div>
         <div class="md:ml-auto">
             <a href="{{ url()->previous() !== url()->current() ? url()->previous() : route('blog.index') }}" class="inline-flex items-center gap-2 text-on-surface-variant hover:text-community-indigo dark:text-surface-dim dark:hover:text-secondary-fixed transition-colors font-ui-medium text-ui-medium font-semibold group border border-surface-border dark:border-surface-tint rounded-full px-4 py-2 hover:bg-surface-container-low dark:hover:bg-primary-container">
-                <span class="material-symbols-outlined text-[20px] transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                <span translate="no" class="material-symbols-outlined text-[20px] transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
                 Retour
             </a>
         </div>
@@ -48,7 +48,7 @@
             </a>
         @empty
             <div class="col-span-full py-16 flex flex-col items-center justify-center text-center bg-surface-container-low dark:bg-primary-container/20 rounded-2xl border border-dashed border-surface-border dark:border-surface-tint">
-                <span class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">article</span>
+                <span translate="no" class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">article</span>
                 <h3 class="font-headline-lg-mobile text-2xl font-bold text-official-ink dark:text-paper-white mb-2">Aucune publication</h3>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim max-w-md">Il n'y a pas encore de publications dans cette catégorie. Revenez plus tard !</p>
             </div>

@@ -33,7 +33,7 @@
         <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <a href="{{ route('community.index') }}" class="flex items-center gap-1.5 text-slate-500 hover:text-community-indigo transition-colors group">
-                    <span class="material-symbols-outlined text-[18px] transform group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+                    <span translate="no" class="material-symbols-outlined text-[18px] transform group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
                     <span class="font-ui-small text-sm hidden sm:inline">Retour à la Communauté</span>
                 </a>
                 <span class="text-slate-300 select-none">|</span>
@@ -49,13 +49,13 @@
                 {{-- Save Draft --}}
                 <button type="button" onclick="submitAs('draft')"
                     class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined text-[16px]">save</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">save</span>
                     Sauvegarder
                 </button>
                 {{-- Publish --}}
                 <button type="button" onclick="submitAs('published')"
                     class="flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-community-indigo hover:bg-community-indigo/90 rounded-lg transition-colors shadow-sm">
-                    <span class="material-symbols-outlined text-[16px]">send</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">send</span>
                     {{ $isEdit ? 'Mettre à jour' : 'Publier' }}
                 </button>
             </div>
@@ -103,7 +103,7 @@
 
                     {{-- Placeholder --}}
                     <div id="cover-placeholder" class="flex flex-col items-center gap-3 text-slate-400 pointer-events-none {{ ($isEdit && $post->getOriginal('cover_image_url')) ? 'hidden' : '' }}">
-                        <span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 0, 'wght' 300;">add_photo_alternate</span>
+                        <span translate="no" class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 0, 'wght' 300;">add_photo_alternate</span>
                         <div class="text-center">
                             <p class="text-sm font-semibold text-slate-500">Ajouter une image</p>
                             <p class="text-xs text-slate-400 mt-0.5">Ratio 1:1 recommandé</p>
@@ -121,7 +121,7 @@
                     {{-- Hover Overlay --}}
                     <div id="cover-overlay" class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity {{ ($isEdit && $post->getOriginal('cover_image_url')) ? '' : 'hidden' }}">
                         <div class="flex items-center gap-2 bg-white/90 text-slate-800 text-sm font-semibold px-4 py-2 rounded-full shadow">
-                            <span class="material-symbols-outlined text-[18px]">edit</span>
+                            <span translate="no" class="material-symbols-outlined text-[18px]">edit</span>
                             Changer l'image
                         </div>
                     </div>
@@ -131,7 +131,7 @@
 
                 @if($isEdit && $post->getOriginal('cover_image_url'))
                     <button type="button" onclick="removeCover(event)" class="absolute top-3 right-3 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow hover:bg-white transition-colors">
-                        <span class="material-symbols-outlined text-[16px] text-slate-600">close</span>
+                        <span translate="no" class="material-symbols-outlined text-[16px] text-slate-600">close</span>
                     </button>
                 @endif
 
@@ -149,7 +149,7 @@
                     ] as [$pre,$suf,$icon,$label])
                     <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
                         class="p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
                     </button>
                     @endforeach
 
@@ -173,12 +173,12 @@
                     ] as [$pre,$suf,$icon,$label])
                     <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
                         class="p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
                     </button>
                     @endforeach
 
                     <div class="ml-auto flex items-center gap-2 text-xs text-slate-400">
-                        <span class="material-symbols-outlined text-[14px]">schedule</span>
+                        <span translate="no" class="material-symbols-outlined text-[14px]">schedule</span>
                         <span id="reading-time-label">1 min de lecture</span>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
             {{-- ── Settings ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">tune</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">tune</span>
                     Paramètres
                 </h3>
 
@@ -222,7 +222,7 @@
                             <option value="draft" {{ $currentStatus === 'draft' ? 'selected' : '' }}>Brouillon (Privé)</option>
                             <option value="published" {{ $currentStatus === 'published' ? 'selected' : '' }}>Publié (Public)</option>
                         </select>
-                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
+                        <span translate="no" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
                     </div>
                 </div>
 
@@ -239,7 +239,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
+                        <span translate="no" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
                     </div>
                     @error('category_id') <p class="mt-1 text-red-500 text-xs">{{ $message }}</p> @enderror
                 </div>
@@ -260,20 +260,20 @@
             {{-- ── Community Guidelines ── --}}
             <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-community-indigo uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">local_police</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">local_police</span>
                     Règles communautaires
                 </h3>
                 <ul class="flex flex-col gap-3">
                     <li class="flex items-start gap-2 text-sm text-slate-700">
-                        <span class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
+                        <span translate="no" class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
                         Respectez les autres membres et leurs opinions.
                     </li>
                     <li class="flex items-start gap-2 text-sm text-slate-700">
-                        <span class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
+                        <span translate="no" class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
                         Pas de spam, de harcèlement ni de désinformation.
                     </li>
                     <li class="flex items-start gap-2 text-sm text-slate-700">
-                        <span class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
+                        <span translate="no" class="material-symbols-outlined text-[16px] mt-0.5 text-community-indigo flex-shrink-0">check_circle</span>
                         Citez vos sources et respectez les droits d'auteur.
                     </li>
                 </ul>
@@ -283,12 +283,12 @@
             <div class="xl:hidden flex flex-col gap-2 mt-4">
                 <button type="button" onclick="submitAs('draft')"
                     class="w-full py-3 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">save</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">save</span>
                     Sauvegarder le brouillon
                 </button>
                 <button type="button" onclick="submitAs('published')"
                     class="w-full py-3 text-sm font-bold text-white bg-community-indigo rounded-xl hover:bg-community-indigo/90 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">send</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">send</span>
                     {{ $isEdit ? 'Mettre à jour' : 'Publier' }}
                 </button>
             </div>
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
                     ${user.avatar_url
                         ? `<img src="${user.avatar_url}" class="w-full h-full object-cover" alt="${user.username}">`
-                        : `<span class="material-symbols-outlined text-[16px] text-slate-400">person</span>`
+                        : `<span translate="no" class="material-symbols-outlined text-[16px] text-slate-400">person</span>`
                     }
                 </div>
                 <div class="flex flex-col leading-none">

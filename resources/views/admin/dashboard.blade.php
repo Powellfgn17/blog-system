@@ -13,11 +13,11 @@
         </div>
         <div class="hidden md:flex space-x-4 mt-4 md:mt-0">
             <a href="{{ route('admin.moderation') }}" class="font-ui-small text-ui-small border border-surface-border text-official-ink dark:text-paper-white px-4 py-2 rounded-DEFAULT hover:bg-surface-container dark:hover:bg-primary-container transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">flag</span>
+                <span translate="no" class="material-symbols-outlined text-sm">flag</span>
                 Modération
             </a>
             <a href="{{ route('admin.categories') }}" class="font-ui-small text-ui-small border border-surface-border text-official-ink dark:text-paper-white px-4 py-2 rounded-DEFAULT hover:bg-surface-container dark:hover:bg-primary-container transition-colors flex items-center gap-2">
-                <span class="material-symbols-outlined text-sm">category</span>
+                <span translate="no" class="material-symbols-outlined text-sm">category</span>
                 Catégories
             </a>
         </div>
@@ -31,7 +31,7 @@
             <h3 class="font-ui-small text-ui-small text-on-surface-variant mb-1">Total Users</h3>
             <p class="font-display-xl-mobile text-display-xl-mobile text-official-ink dark:text-paper-white font-extrabold">{{ number_format($stats['users']) }}</p>
             <div class="mt-4 flex items-center text-community-teal font-ui-small text-ui-small">
-                <span class="material-symbols-outlined text-sm mr-1">group</span>
+                <span translate="no" class="material-symbols-outlined text-sm mr-1">group</span>
                 <span>Active accounts</span>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <h3 class="font-ui-small text-ui-small text-on-surface-variant mb-1">Blog Posts</h3>
             <p class="font-display-xl-mobile text-display-xl-mobile text-official-ink dark:text-paper-white font-extrabold">{{ number_format($stats['posts_blog']) }}</p>
             <div class="mt-4 flex items-center text-community-indigo font-ui-small text-ui-small">
-                <span class="material-symbols-outlined text-sm mr-1">article</span>
+                <span translate="no" class="material-symbols-outlined text-sm mr-1">article</span>
                 <span>Official editorials</span>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <h3 class="font-ui-small text-ui-small text-on-surface-variant mb-1">Community Posts</h3>
             <p class="font-display-xl-mobile text-display-xl-mobile text-official-ink dark:text-paper-white font-extrabold">{{ number_format($stats['posts_community']) }}</p>
             <div class="mt-4 flex items-center text-community-teal font-ui-small text-ui-small">
-                <span class="material-symbols-outlined text-sm mr-1">forum</span>
+                <span translate="no" class="material-symbols-outlined text-sm mr-1">forum</span>
                 <span>Community threads</span>
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="bg-[#EEF2FF] dark:bg-primary-container border border-community-indigo/20 p-6 rounded-lg shadow-[0px_4px_20px_rgba(15,23,42,0.05)] relative overflow-hidden flex flex-col justify-between">
             <div>
                 <div class="flex items-center gap-2 mb-2">
-                    <span class="material-symbols-outlined text-community-indigo" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    <span translate="no" class="material-symbols-outlined text-community-indigo" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
                     <h3 class="font-label-caps text-label-caps text-community-indigo tracking-widest uppercase">System Health</h3>
                 </div>
                 <p class="font-ui-small text-ui-small text-official-ink dark:text-paper-white mt-2">
@@ -72,7 +72,7 @@
                 </p>
             </div>
             <a href="{{ route('admin.moderation') }}" class="text-left font-ui-small text-ui-small text-community-indigo font-medium hover:underline mt-4 flex items-center gap-1">
-                View moderation queue <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                View moderation queue <span translate="no" class="material-symbols-outlined text-sm">arrow_forward</span>
             </a>
         </div>
     </div>
@@ -82,7 +82,7 @@
         <section class="bg-surface-container-lowest dark:bg-primary-container/10 border border-surface-border dark:border-surface-tint rounded-lg shadow-[0px_4px_20px_rgba(15,23,42,0.05)] p-6">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="font-ui-medium text-ui-medium font-bold text-official-ink dark:text-paper-white flex items-center gap-2">
-                    <span class="material-symbols-outlined text-reaction-red">flag</span>
+                    <span translate="no" class="material-symbols-outlined text-reaction-red">flag</span>
                     Contenus signalés
                 </h2>
                 <span class="bg-surface-container dark:bg-primary-container px-3 py-1 rounded-full font-label-caps text-label-caps text-on-surface-variant">File : {{ $stats['reports_pending'] }}</span>
@@ -135,7 +135,7 @@
     <div class="col-span-1 md:col-span-4">
         <section class="bg-[#F1F5F9] dark:bg-primary-container/20 border border-surface-border dark:border-surface-tint rounded-lg p-6 h-full">
             <h2 class="font-ui-medium text-ui-medium font-bold text-official-ink dark:text-paper-white flex items-center gap-2 mb-6">
-                <span class="material-symbols-outlined text-community-indigo">group</span>
+                <span translate="no" class="material-symbols-outlined text-community-indigo">group</span>
                 Utilisateurs signalés
             </h2>
             <div class="space-y-4">
@@ -175,10 +175,10 @@
             <!-- Quick Actions -->
             <div class="mt-8 pt-6 border-t border-surface-border dark:border-surface-tint space-y-3">
                 <a href="{{ route('admin.categories') }}" class="flex items-center gap-2 text-on-surface-variant hover:text-community-indigo font-ui-small transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">category</span> Gérer les catégories
+                    <span translate="no" class="material-symbols-outlined text-[18px]">category</span> Gérer les catégories
                 </a>
                 <a href="{{ route('blog.create') }}" class="flex items-center gap-2 text-on-surface-variant hover:text-community-indigo font-ui-small transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">edit</span> Nouvel article officiel
+                    <span translate="no" class="material-symbols-outlined text-[18px]">edit</span> Nouvel article officiel
                 </a>
             </div>
         </section>

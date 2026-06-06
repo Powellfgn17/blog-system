@@ -15,7 +15,7 @@
         <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <a href="{{ route('blog.index') }}" class="flex items-center gap-1.5 text-slate-500 hover:text-slate-800 transition-colors group">
-                    <span class="material-symbols-outlined text-[18px] transform group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+                    <span translate="no" class="material-symbols-outlined text-[18px] transform group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
                     <span class="font-ui-small text-sm hidden sm:inline">Retour au Blog</span>
                 </a>
                 <span class="text-slate-300 select-none">|</span>
@@ -31,19 +31,19 @@
                 {{-- Save Draft --}}
                 <button type="button" onclick="submitAs('draft')"
                     class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined text-[16px]">save</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">save</span>
                     Sauvegarder
                 </button>
                 {{-- Preview --}}
                 <button type="button" onclick="openPreview()"
                     class="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
-                    <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">open_in_new</span>
                     Aperçu
                 </button>
                 {{-- Publish --}}
                 <button type="button" onclick="submitAs('published')"
                     class="flex items-center gap-2 px-5 py-2 text-sm font-bold text-white bg-slate-900 hover:bg-slate-700 rounded-lg transition-colors shadow-sm">
-                    <span class="material-symbols-outlined text-[16px]">publish</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">publish</span>
                     {{ $isEdit ? 'Mettre à jour' : 'Publier sur le Blog' }}
                 </button>
             </div>
@@ -91,7 +91,7 @@
 
                     {{-- Placeholder --}}
                     <div id="cover-placeholder" class="flex flex-col items-center gap-3 text-slate-400 pointer-events-none {{ ($isEdit && $post->getOriginal('cover_image_url')) ? 'hidden' : '' }}">
-                        <span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 0, 'wght' 300;">add_photo_alternate</span>
+                        <span translate="no" class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 0, 'wght' 300;">add_photo_alternate</span>
                         <div class="text-center">
                             <p class="text-sm font-semibold text-slate-500">Cliquer pour ajouter une image de couverture</p>
                             <p class="text-xs text-slate-400 mt-0.5">Format recommandé : 21:8 (2100×800px) · JPG, PNG, WebP</p>
@@ -109,7 +109,7 @@
                     {{-- Hover Overlay --}}
                     <div id="cover-overlay" class="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity {{ ($isEdit && $post->getOriginal('cover_image_url')) ? '' : 'hidden' }}">
                         <div class="flex items-center gap-2 bg-white/90 text-slate-800 text-sm font-semibold px-4 py-2 rounded-full shadow">
-                            <span class="material-symbols-outlined text-[18px]">edit</span>
+                            <span translate="no" class="material-symbols-outlined text-[18px]">edit</span>
                             Changer l'image
                         </div>
                     </div>
@@ -119,7 +119,7 @@
 
                 @if($isEdit && $post->getOriginal('cover_image_url'))
                     <button type="button" onclick="removeCover()" class="absolute top-3 right-3 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow hover:bg-white transition-colors">
-                        <span class="material-symbols-outlined text-[16px] text-slate-600">close</span>
+                        <span translate="no" class="material-symbols-outlined text-[16px] text-slate-600">close</span>
                     </button>
                 @endif
 
@@ -138,7 +138,7 @@
                     ] as [$pre,$suf,$icon,$label])
                     <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
                         class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-200 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
                     </button>
                     @endforeach
 
@@ -167,12 +167,12 @@
                     ] as [$pre,$suf,$icon,$label])
                     <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
                         class="p-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-200 transition-colors">
-                        <span class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
                     </button>
                     @endforeach
 
                     <div class="ml-auto flex items-center gap-2 text-xs text-slate-400">
-                        <span class="material-symbols-outlined text-[14px]">schedule</span>
+                        <span translate="no" class="material-symbols-outlined text-[14px]">schedule</span>
                         <span id="reading-time-label">1 min de lecture</span>
                         <span class="ml-2" id="word-count">0 mots</span>
                     </div>
@@ -200,7 +200,7 @@
             {{-- ── Publication Status ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">cloud_upload</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">cloud_upload</span>
                     Statut de publication
                 </h3>
 
@@ -212,7 +212,7 @@
                         <input type="radio" name="_status_radio" value="{{ $val }}" class="sr-only"
                             {{ $currentStatus === $val ? 'checked' : '' }}
                             onchange="selectStatus('{{ $val }}')">
-                        <span class="material-symbols-outlined text-[18px] text-{{ $color }}-600">{{ $icon }}</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px] text-{{ $color }}-600">{{ $icon }}</span>
                         <span class="text-sm font-semibold text-slate-700">{{ $lbl }}</span>
                     </label>
                     @endforeach
@@ -230,7 +230,7 @@
             {{-- ── Category ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">category</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">category</span>
                     Catégorie
                 </h3>
                 <div class="relative">
@@ -243,7 +243,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
+                    <span translate="no" class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[18px]">expand_more</span>
                 </div>
                 @error('category_id') <p class="mt-1 text-red-500 text-xs">{{ $message }}</p> @enderror
             </div>
@@ -251,7 +251,7 @@
             {{-- ── Tags ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">sell</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">sell</span>
                     Tags
                 </h3>
                 <p class="text-xs text-slate-400 mb-3">Séparez les tags par des virgules.</p>
@@ -269,7 +269,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[16px] text-amber-500">star</span>
+                            <span translate="no" class="material-symbols-outlined text-[16px] text-amber-500">star</span>
                             Article Featured
                         </h3>
                         <p class="text-xs text-slate-400 mt-0.5">Affiché en héro sur la page d'accueil du Blog.</p>
@@ -286,7 +286,7 @@
             {{-- ── SEO Metadata ── --}}
             <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px]">travel_explore</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px]">travel_explore</span>
                     SEO & Métadonnées
                 </h3>
 
@@ -318,7 +318,7 @@
             {{-- ── Editorial Review Checklist ── --}}
             <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[14px] text-slate-400">fact_check</span>
+                    <span translate="no" class="material-symbols-outlined text-[14px] text-slate-400">fact_check</span>
                     Revue Éditoriale
                 </h3>
                 <div class="flex flex-col gap-3">
@@ -351,12 +351,12 @@
             <div class="xl:hidden flex flex-col gap-2">
                 <button type="button" onclick="submitAs('draft')"
                     class="w-full py-3 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">save</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">save</span>
                     Sauvegarder le brouillon
                 </button>
                 <button type="button" onclick="submitAs('published')"
                     class="w-full py-3 text-sm font-bold text-white bg-slate-900 rounded-xl hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined text-[16px]">publish</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px]">publish</span>
                     {{ $isEdit ? 'Mettre à jour' : 'Publier sur le Blog' }}
                 </button>
             </div>

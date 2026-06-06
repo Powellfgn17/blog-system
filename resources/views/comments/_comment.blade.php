@@ -53,7 +53,7 @@
                                 class="p-1 rounded hover:bg-surface-container dark:hover:bg-primary-container text-on-surface-variant hover:text-community-indigo dark:hover:text-secondary-fixed transition-colors"
                                 title="Modifier"
                             >
-                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                                <span translate="no" class="material-symbols-outlined text-[18px]">edit</span>
                             </button>
                         @endif
 
@@ -62,7 +62,7 @@
                             <form method="POST" action="{{ route('comments.destroy', $comment) }}" onsubmit="return confirm('Supprimer ce commentaire ?')">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="p-1 rounded hover:bg-error-container dark:hover:bg-on-error-container/10 text-on-surface-variant hover:text-on-error-container dark:hover:text-reaction-red transition-colors" title="Supprimer">
-                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                    <span translate="no" class="material-symbols-outlined text-[18px]">delete</span>
                                 </button>
                             </form>
                         @endif
@@ -75,7 +75,7 @@
                                 class="p-1 rounded hover:bg-surface-container dark:hover:bg-primary-container text-on-surface-variant hover:text-on-surface transition-colors"
                                 title="Signaler"
                             >
-                                <span class="material-symbols-outlined text-[18px]">flag</span>
+                                <span translate="no" class="material-symbols-outlined text-[18px]">flag</span>
                             </button>
                         @endif
                     </div>
@@ -130,7 +130,7 @@
                             data-reaction-type="{{ $type }}"
                             class="inline-flex items-center gap-1 px-2 py-1 rounded-full transition-colors border border-surface-border dark:border-transparent group {{ $hasReacted ? 'bg-community-indigo/10 text-community-indigo' : 'bg-surface-container dark:bg-surface-container-low hover:bg-surface-dim dark:hover:bg-primary-container' }}"
                         >
-                            <span class="material-symbols-outlined text-[16px] {{ $hasReacted ? 'text-community-indigo' : 'group-hover:text-community-indigo' }}" data-icon="{{ $icon }}" style="{{ $hasReacted ? 'font-variation-settings: \'FILL\' 1;' : '' }}">{{ $icon }}</span>
+                            <span translate="no" class="material-symbols-outlined text-[16px] {{ $hasReacted ? 'text-community-indigo' : 'group-hover:text-community-indigo' }}" data-icon="{{ $icon }}" style="{{ $hasReacted ? 'font-variation-settings: \'FILL\' 1;' : '' }}">{{ $icon }}</span>
                             <span class="font-ui-small text-[11px] font-medium {{ $hasReacted ? 'text-community-indigo' : 'text-on-surface-variant group-hover:text-community-indigo' }}" data-reaction-count="{{ $type }}">{{ $count }}</span>
                         </button>
                     @endforeach
@@ -141,7 +141,7 @@
                     class="inline-flex items-center gap-1 px-3 py-1 bg-surface-container dark:bg-surface-container-low hover:bg-surface-dim dark:hover:bg-primary-container transition-colors rounded-full border border-surface-border dark:border-transparent text-on-surface-variant group"
                     onclick="this.nextElementSibling.classList.toggle('hidden')"
                 >
-                    <span class="material-symbols-outlined text-[16px] group-hover:text-official-ink dark:group-hover:text-paper-white">chat_bubble_outline</span>
+                    <span translate="no" class="material-symbols-outlined text-[16px] group-hover:text-official-ink dark:group-hover:text-paper-white">chat_bubble_outline</span>
                     <span class="font-ui-small text-ui-small font-medium group-hover:text-official-ink dark:group-hover:text-paper-white">Répondre</span>
                 </button>
 

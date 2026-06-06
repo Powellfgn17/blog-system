@@ -4,7 +4,7 @@
 <section class="max-w-container-max mx-auto px-0 md:px-margin-desktop py-4 flex flex-col gap-10">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-surface-border pb-6">
         <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-4xl text-official-ink dark:text-paper-white" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+            <span translate="no" class="material-symbols-outlined text-4xl text-official-ink dark:text-paper-white" style="font-variation-settings: 'FILL' 1;">bookmark</span>
             <div>
                 <h1 class="font-display-xl-mobile md:font-display-xl font-extrabold text-official-ink dark:text-paper-white tracking-tight">Mes Favoris</h1>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim mt-2">{{ $bookmarks->total() }} publication(s) enregistrée(s)</p>
@@ -34,7 +34,7 @@
                             class="text-community-indigo hover:text-reaction-red transition-colors p-1 rounded-full hover:bg-surface-container dark:hover:bg-primary-container"
                             title="Retirer des favoris"
                         >
-                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+                            <span translate="no" class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
                         </button>
                     </div>
                     
@@ -53,7 +53,7 @@
             </article>
         @empty
             <div class="col-span-full py-16 flex flex-col items-center justify-center text-center bg-surface-container-low dark:bg-primary-container/20 rounded-2xl border border-dashed border-surface-border dark:border-surface-tint">
-                <span class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">bookmark_border</span>
+                <span translate="no" class="material-symbols-outlined text-[64px] text-surface-tint dark:text-on-surface-variant mb-4">bookmark_border</span>
                 <h3 class="font-headline-lg-mobile text-2xl font-bold text-official-ink dark:text-paper-white mb-2">Aucun favori enregistré</h3>
                 <p class="font-ui-medium text-ui-medium text-on-surface-variant dark:text-surface-dim max-w-md">Vous n'avez pas encore enregistré de publications. Explorez le blog ou la communauté pour trouver du contenu intéressant.</p>
                 <div class="flex gap-4 mt-6">

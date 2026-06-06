@@ -6,7 +6,7 @@
     <!-- Back Button -->
     <div class="max-w-article-width mx-auto mb-8 flex justify-start">
         <a href="{{ $context === 'blog' ? route('blog.index') : route('community.index') }}" class="inline-flex items-center gap-2 text-on-surface-variant hover:text-community-indigo dark:text-surface-dim dark:hover:text-secondary-fixed transition-colors font-ui-medium text-ui-medium font-semibold group">
-            <span class="material-symbols-outlined text-[20px] transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            <span translate="no" class="material-symbols-outlined text-[20px] transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
             Retour
         </a>
     </div>
@@ -63,7 +63,7 @@
         <!-- AI Summary Indicator (if we had a summary on the model, we could show it here. For now, we only show it if a summary exists) -->
         @if(isset($post->summary))
             <div class="ai-summary p-6 rounded-lg mb-10 flex gap-4 items-start bg-[#EEF2FF] dark:bg-primary-container border border-community-indigo/20">
-                <span class="material-symbols-outlined text-community-indigo" data-icon="temp_preferences_custom">temp_preferences_custom</span>
+                <span translate="no" class="material-symbols-outlined text-community-indigo" data-icon="temp_preferences_custom">temp_preferences_custom</span>
                 <div>
                     <h3 class="font-ui-medium text-ui-medium font-semibold text-community-indigo mb-2">Smart Summary</h3>
                     <p class="font-ui-small text-ui-small text-official-ink dark:text-paper-white">{{ $post->summary }}</p>
@@ -118,7 +118,7 @@
                             data-reaction-type="{{ $type }}"
                             class="inline-flex items-center gap-1 px-3 py-2 rounded-full transition-colors border border-surface-border dark:border-transparent group {{ $hasReacted ? 'bg-community-indigo/10 text-community-indigo' : 'bg-surface-container dark:bg-surface-container-low hover:bg-surface-dim dark:hover:bg-primary-container' }}"
                         >
-                            <span class="material-symbols-outlined text-[18px] {{ $hasReacted ? 'text-community-indigo' : 'group-hover:text-community-indigo' }}" data-icon="{{ $icon }}" style="{{ $hasReacted ? 'font-variation-settings: \'FILL\' 1;' : '' }}">{{ $icon }}</span>
+                            <span translate="no" class="material-symbols-outlined text-[18px] {{ $hasReacted ? 'text-community-indigo' : 'group-hover:text-community-indigo' }}" data-icon="{{ $icon }}" style="{{ $hasReacted ? 'font-variation-settings: \'FILL\' 1;' : '' }}">{{ $icon }}</span>
                             <span data-reaction-count="{{ $type }}" class="font-ui-small text-ui-small font-medium {{ $hasReacted ? 'text-community-indigo' : 'text-on-surface-variant group-hover:text-community-indigo' }}">{{ $count }}</span>
                         </button>
                     @endforeach
@@ -132,7 +132,7 @@
                         data-bookmark-post-id="{{ $post->id }}"
                         class="flex items-center gap-2 px-4 py-2 hover:bg-surface-dim dark:hover:bg-primary-container transition-colors rounded-full font-ui-small text-ui-small {{ $isBookmarked ?? false ? 'bg-community-indigo/10 text-community-indigo' : 'bg-surface-container dark:bg-surface-container-low text-official-ink dark:text-paper-white' }}"
                     >
-                        <span class="material-symbols-outlined text-[18px]" data-icon="bookmark" style="{{ $isBookmarked ?? false ? 'font-variation-settings: \'FILL\' 1;' : '' }}">bookmark</span> 
+                        <span translate="no" class="material-symbols-outlined text-[18px]" data-icon="bookmark" style="{{ $isBookmarked ?? false ? 'font-variation-settings: \'FILL\' 1;' : '' }}">bookmark</span> 
                         <span data-bookmark-text>{{ $isBookmarked ?? false ? 'Enregistré' : 'Enregistrer' }}</span>
                     </button>
 
@@ -142,7 +142,7 @@
                         onclick="navigator.clipboard?.writeText(location.href).then(() => { this.querySelector('span.label').textContent='Copié !' ; setTimeout(()=>this.querySelector('span.label').textContent='Partager',2000) });"
                         class="flex items-center gap-2 px-4 py-2 bg-surface-container dark:bg-surface-container-low hover:bg-surface-dim dark:hover:bg-primary-container transition-colors rounded-full font-ui-small text-ui-small text-official-ink dark:text-paper-white"
                     >
-                        <span class="material-symbols-outlined text-[18px]">share</span>
+                        <span translate="no" class="material-symbols-outlined text-[18px]">share</span>
                         <span class="label">Partager</span>
                     </button>
 
@@ -152,7 +152,7 @@
                             href="{{ $post->isBlog() ? route('blog.edit', $post) : route('community.edit', $post) }}"
                             class="flex items-center gap-2 px-4 py-2 bg-surface-container dark:bg-surface-container-low hover:bg-community-indigo/10 dark:hover:bg-secondary-fixed/10 transition-colors rounded-full font-ui-small text-ui-small text-community-indigo dark:text-secondary-fixed"
                         >
-                            <span class="material-symbols-outlined text-[18px]">edit</span> Modifier
+                            <span translate="no" class="material-symbols-outlined text-[18px]">edit</span> Modifier
                         </a>
                     @endcan
 
@@ -161,7 +161,7 @@
                         <form method="POST" action="{{ $post->isBlog() ? route('blog.destroy', $post) : route('community.destroy', $post) }}" onsubmit="return confirm('Supprimer cette publication ?')">
                             @csrf @method('DELETE')
                             <button type="submit" class="flex items-center gap-2 px-4 py-2 bg-error-container dark:bg-on-error-container/10 hover:bg-reaction-red/10 transition-colors rounded-full font-ui-small text-ui-small text-on-error-container dark:text-reaction-red">
-                                <span class="material-symbols-outlined text-[18px]">delete</span> Supprimer
+                                <span translate="no" class="material-symbols-outlined text-[18px]">delete</span> Supprimer
                             </button>
                         </form>
                     @endcan
@@ -173,7 +173,7 @@
                             onclick="openReportModal('post', {{ $post->id }})"
                             class="flex items-center gap-2 px-4 py-2 bg-surface-container dark:bg-surface-container-low hover:bg-surface-dim dark:hover:bg-primary-container transition-colors rounded-full font-ui-small text-ui-small text-on-surface-variant"
                         >
-                            <span class="material-symbols-outlined text-[18px]">flag</span> Signaler
+                            <span translate="no" class="material-symbols-outlined text-[18px]">flag</span> Signaler
                         </button>
                     @endcannot
                 </div>
@@ -241,7 +241,7 @@
         <div class="flex items-center justify-between">
             <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-official-ink dark:text-paper-white">Signaler un contenu</h2>
             <button onclick="closeReportModal()" class="p-2 rounded-full hover:bg-surface-container dark:hover:bg-primary-container transition-colors">
-                <span class="material-symbols-outlined text-on-surface-variant">close</span>
+                <span translate="no" class="material-symbols-outlined text-on-surface-variant">close</span>
             </button>
         </div>
 
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             list.forEach((u, i) => {
                 const li = document.createElement('li');
                 li.className = 'flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-surface-container dark:hover:bg-primary-container transition-colors';
-                li.innerHTML = `<div class="w-6 h-6 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">${u.avatar_url ? `<img src="${u.avatar_url}" class="w-full h-full object-cover">` : '<span class="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>'}</div><div><div class="font-ui-small text-ui-small text-official-ink dark:text-paper-white">${u.name}</div><div class="font-ui-small text-[11px] text-on-surface-variant">@${u.username}</div></div>`;
+                li.innerHTML = `<div class="w-6 h-6 rounded-full bg-surface-container-high overflow-hidden flex-shrink-0">${u.avatar_url ? `<img src="${u.avatar_url}" class="w-full h-full object-cover">` : '<span translate="no" class="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>'}</div><div><div class="font-ui-small text-ui-small text-official-ink dark:text-paper-white">${u.name}</div><div class="font-ui-small text-[11px] text-on-surface-variant">@${u.username}</div></div>`;
                 li.addEventListener('click', () => insert(u.username));
                 drop.appendChild(li);
             });

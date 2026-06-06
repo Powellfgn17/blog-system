@@ -13,6 +13,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
+        html, body {
+            overflow-x: hidden;
+            min-width: 0;
+        }
+        header, footer, nav, main {
+            max-width: 100%;
+        }
+        header *, footer * {
+            max-width: 100%;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }

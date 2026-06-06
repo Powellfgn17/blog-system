@@ -131,8 +131,8 @@ class PostController extends Controller
         ];
 
         if ($request->hasFile('cover_image')) {
-            $path = $request->file('cover_image')->store('covers', 'public');
-            $data['cover_image_url'] = '/storage/' . $path;
+            $result = cloudinary()->upload($request->file('cover_image')->getRealPath());
+            $data['cover_image_url'] = $result->getSecurePath();
         }
 
         $post = Post::create($data);
@@ -179,8 +179,8 @@ class PostController extends Controller
         ];
 
         if ($request->hasFile('cover_image')) {
-            $path = $request->file('cover_image')->store('covers', 'public');
-            $data['cover_image_url'] = '/storage/' . $path;
+            $result = cloudinary()->upload($request->file('cover_image')->getRealPath());
+            $data['cover_image_url'] = $result->getSecurePath();
         }
 
         $post->update($data);

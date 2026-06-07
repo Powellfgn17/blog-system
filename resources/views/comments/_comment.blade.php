@@ -14,6 +14,7 @@
 @endphp
 
 <div
+    id="comment-{{ $comment->id }}"
     class="{{ $d === 0 ? 'flex gap-4' : 'mt-4 flex gap-4 pl-6 relative' }}"
     data-comment-id="{{ $comment->id }}"
 >

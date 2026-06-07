@@ -58,7 +58,7 @@ class CommentController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Commentaire publié.');
+        return redirect()->to(url()->previous() . '#comment-' . $comment->id)->with('success', 'Commentaire publié.');
     }
 
     public function update(StoreCommentRequest $request, Comment $comment): JsonResponse|RedirectResponse
@@ -76,7 +76,7 @@ class CommentController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Commentaire modifié.');
+        return redirect()->to(url()->previous() . '#comment-' . $comment->id)->with('success', 'Commentaire modifié.');
     }
 
     public function destroy(Request $request, Comment $comment): JsonResponse|RedirectResponse

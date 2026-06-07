@@ -143,39 +143,39 @@
 
                 {{-- Toolbar --}}
                 <div class="border-b border-slate-100 bg-slate-50 px-4 py-2 flex items-center gap-1 flex-wrap">
-                    @foreach([
-                        ['**','**','format_bold','Gras'],
-                        ['*','*','format_italic','Italique'],
-                    ] as [$pre,$suf,$icon,$label])
-                    <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
-                        class="p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
-                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                    {{-- Inline formats --}}
+                    <button type="button" data-md-prefix="**" data-md-suffix="**" data-md-type="inline" title="Gras"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
+                        <span translate="no" class="material-symbols-outlined text-[18px]">format_bold</span>
                     </button>
-                    @endforeach
+                    <button type="button" data-md-prefix="*" data-md-suffix="*" data-md-type="inline" title="Italique"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
+                        <span translate="no" class="material-symbols-outlined text-[18px]">format_italic</span>
+                    </button>
 
                     <div class="w-px h-5 bg-slate-200 mx-1"></div>
 
-                    @foreach([
-                        ['## ','','h_mobiledata','H2'],
-                        ['### ','','h_plus_mobiledata','H3'],
-                    ] as [$pre,$suf,$icon,$label])
-                    <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
-                        class="p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors text-xs font-bold w-8 h-8 flex items-center justify-center">
-                        {{ $label }}
+                    {{-- Block-level formats: headings --}}
+                    <button type="button" data-md-prefix="## " data-md-type="block" title="H2"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors text-xs font-bold w-8 h-8 flex items-center justify-center">
+                        H2
                     </button>
-                    @endforeach
+                    <button type="button" data-md-prefix="### " data-md-type="block" title="H3"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors text-xs font-bold w-8 h-8 flex items-center justify-center">
+                        H3
+                    </button>
 
                     <div class="w-px h-5 bg-slate-200 mx-1"></div>
 
-                    @foreach([
-                        ['> ','','format_quote','Citation'],
-                        ['- ','','format_list_bulleted','Liste'],
-                    ] as [$pre,$suf,$icon,$label])
-                    <button type="button" onclick="insertMarkdown('{{ $pre }}','{{ $suf }}')" title="{{ $label }}"
-                        class="p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
-                        <span translate="no" class="material-symbols-outlined text-[18px]">{{ $icon }}</span>
+                    {{-- Block-level formats: quote, lists --}}
+                    <button type="button" data-md-prefix="> " data-md-type="block" title="Citation"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
+                        <span translate="no" class="material-symbols-outlined text-[18px]">format_quote</span>
                     </button>
-                    @endforeach
+                    <button type="button" data-md-prefix="- " data-md-type="block" title="Liste"
+                        class="md-btn p-2 rounded-lg text-slate-500 hover:text-community-indigo hover:bg-slate-200 transition-colors">
+                        <span translate="no" class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
+                    </button>
 
                     <div class="ml-auto flex items-center gap-2 text-xs text-slate-400">
                         <span translate="no" class="material-symbols-outlined text-[14px]">schedule</span>
@@ -348,7 +348,8 @@ function removeCover(e) {
 }
 
 // ─── Markdown toolbar ─────────────────────────────────────────
-function insertMarkdown(prefix, suffix) {
+// Inline format: wraps selection with prefix/suffix (bold, italic)
+function insertInlineMarkdown(prefix, suffix) {
     const textarea = document.getElementById('post-body');
     const start = textarea.selectionStart;
     const end   = textarea.selectionEnd;
@@ -359,11 +360,56 @@ function insertMarkdown(prefix, suffix) {
     if (sel.length === 0) {
         textarea.selectionStart = textarea.selectionEnd = start + prefix.length;
     } else {
-        textarea.selectionStart = start;
-        textarea.selectionEnd   = start + prefix.length + sel.length + suffix.length;
+        textarea.selectionStart = start + prefix.length;
+        textarea.selectionEnd   = start + prefix.length + sel.length;
     }
     updateStats();
 }
+
+// Block format: inserts prefix at the beginning of the current line (headings, quotes, lists)
+function insertBlockMarkdown(prefix) {
+    const textarea = document.getElementById('post-body');
+    const start = textarea.selectionStart;
+    const end   = textarea.selectionEnd;
+    const text  = textarea.value;
+
+    // Find the start of the current line
+    let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+
+    // Check if there's already a block prefix on this line
+    const lineContent = text.substring(lineStart);
+    const existingMatch = lineContent.match(/^(#{1,3}\s|>\s|- |\d+\.\s)/);
+
+    if (existingMatch) {
+        // Replace existing block prefix with new one
+        const oldPrefix = existingMatch[0];
+        textarea.value = text.substring(0, lineStart) + prefix + text.substring(lineStart + oldPrefix.length);
+        textarea.focus();
+        const newCursorPos = start - oldPrefix.length + prefix.length;
+        textarea.selectionStart = textarea.selectionEnd = newCursorPos;
+    } else {
+        // Insert prefix at the start of the line
+        textarea.value = text.substring(0, lineStart) + prefix + text.substring(lineStart);
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = start + prefix.length;
+    }
+    updateStats();
+}
+
+// Event delegation for all toolbar buttons
+document.querySelectorAll('.md-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const type   = this.dataset.mdType;
+        const prefix = this.dataset.mdPrefix || '';
+        const suffix = this.dataset.mdSuffix || '';
+
+        if (type === 'inline') {
+            insertInlineMarkdown(prefix, suffix);
+        } else if (type === 'block') {
+            insertBlockMarkdown(prefix);
+        }
+    });
+});
 
 // ─── Reading time ─────────────────────────────────────────────
 function updateStats() {

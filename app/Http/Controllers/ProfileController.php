@@ -43,11 +43,19 @@ class ProfileController extends Controller
         $user->fill($request->safe()->only(['name', 'bio']));
 
         if ($request->hasFile('avatar')) {
-            if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
-            }
+            \Cloudinary\Configuration\Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => ['secure' => true]
+            ]);
 
-            $user->avatar = $request->file('avatar')->store('avatars', 'public');
+            $result = (new \Cloudinary\Api\Upload\UploadApi())->upload(
+                $request->file('avatar')->getRealPath()
+            );
+            $user->avatar = $result['secure_url'];
         }
 
         if ($request->filled('password')) {
